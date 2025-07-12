@@ -224,7 +224,21 @@ label vasesplit:
 
 label berude:
 
-    c: 
+    m "Um, I think I'm good. I'll get my own present."
+
+    c: "Oh, okay."
+
+    scene black with fade
+
+    pause 1.0
+
+    scene bg forest with fade
+
+    c "You got her a hat? Cool!"
+
+    c "Ahh! I didn't even notice! We have to hurry. They're going to start decorating soon!"
+
+    jump partyprep
 
 label surprisedcupcake:
 
@@ -246,5 +260,42 @@ label surprisedcupcake:
 
 label partyprep:
 
-    r "Hello!"
+    "Wow, so many people showed up!"
+
+    r "Hello, Lily! I didn't know you were coming!"
+
+    m "Hi!"
+
+    r "I'm so glad to see you here! Everyone is so excited for Strudel's surprise tomorrow."
+
+    m "Me too!"
+
+    r "Hey, wait a minute... are you free tomorrow?"
+
+    m "Well, yeah. Why?"
+
+    r "Perfect! Could you be the one to bring Strudel to the surprise party?"
+
+    m "Sure! That sounds like a load of fun."
+
+    r "Great!"
+
+    r "Hey! Everyone! We have a volunteer to help bring Strudel here."
+
+    scene black with fade
+
+    pause 1.0
+
+    scene bg forest with fade
+
+    r "Haha, everyone is super happy you could do it. Strudel really likes you."
+
+    m "I'm happy to help too."
+
+    jump nextday
+
+label nextday:
+
+    
+    
 
