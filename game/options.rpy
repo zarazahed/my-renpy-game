@@ -251,3 +251,5 @@ style nav_button:
 
 style nav_button_hover:
     font "fonts/sourgummy.ttf"
+
+define config.default_text_cps = 30
