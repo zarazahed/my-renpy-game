@@ -1,15 +1,25 @@
 ﻿define c = Character('Coco', color="#310075")
-define minu = Character('Minu', color="#310075")
+define minu = Character('Minu', color="#309117")
 define m = Character('Me', color="#00750c")
 define r = Character('Raspberry', color="#920f5e")
 define s = Character('Strudel', color="#753d0a")
 image bg forest = "images/forest.png"
+image bg doorclosed = im.Scale("images/doorclosed.png", 1920, 1080)
+image bg dooropen = im.Scale("images/dooropen.png", 1920, 1080)
+image bg teacounter = im.Scale("images/teacounter.png", 1920, 1080)
+image bg market = im.Scale("images/market.png", 1920, 1080)
+image bg strudelhouse = im.Scale("images/strudelhouse.png", 1920, 1080)
+image bg cocohouse = im.Scale("images/cocohouse.png", 1920, 1080)
+image bg yarn = im.Scale("images/yarn.png", 1920, 1080)
+
 default present = ""
 default teaboost = ""
 
 label start:
 
-    scene bg forest with fade
+    stop music fadeout 1.0
+
+    scene bg doorclosed with fade
 
     "It's been a bit of a slow day."
 
@@ -17,13 +27,17 @@ label start:
 
     "But today I feel a bit more bored than usual."
 
-    play music "audio/nicesong.mp3"
-
     "Yawn... and a bit tired."
 
-    show testing with dissolve
+    play sound "audio/door.mp3"
+
+    scene bg dooropen
+
+    show cocosmile with dissolve
 
     c "Good morning, Lily!"
+
+    play music "audio/nicesong.mp3"
 
     m "Oh, hello! This is a pleasant surprise!"
 
@@ -31,26 +45,29 @@ label start:
 
     "Wow, it really has been a while."
 
-    c "I was visiting the area looking for potion ingredients, so I wanted to drop by for a visit."
+    c "I was visiting the area while shopping, so I wanted to drop by for a visit."
 
     m "Come in and have some tea! We have a lot to catch up on."
+
 
     jump teascene
 
 label teascene:
 
-    scene bg forest with fade
+    stop music fadeout 1.0
 
-    "Hm, Cupcake said she wanted twilight green tea. I would have some too... but I'm afraid that's the last one."
+    scene bg teacounter with fade
+
+    "Hm, Coco said she wanted twilight green tea. I would have some too... but I'm afraid that's the last one."
     
     "Oh well. Which tea should I choose for myself?"
 
 menu: 
     
     "Enchanted herbal mix: gives random energy boosts for a couple of days":
-        jump herbal
         $ teaboost = "energy"
-
+        jump herbal
+        
     "Fairydew brew: gives you extra sprinkles of luck for the rest of the day":
         $ teaboost = "luck"
         jump fairydew
@@ -138,11 +155,11 @@ label invitation:
 
     m "Wait, really? Oh no... I had it marked a week later in my calendar."
 
-    m "Well, it's a good thing you told me! I'll be sure to send a letter to her."
+    m "Well, it's a good thing you told me!"
 
-    c "Hey, I'm going there too today! We should go together."
+    c "We should go to the market together to get presents!"
 
-    c "Anyways, a bunch of her friends are planning a surprise party! We're going to decorate my place this evening and hang out."
+    c "Oh yeah - a bunch of her friends are planning a surprise party too! We're going to decorate my place this evening and hang out."
     
     c "Do you want to join?"
 
@@ -187,7 +204,7 @@ label market:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg market with fade
 
     m "Wow, so many new stalls have popped up since I last visited."
 
@@ -201,7 +218,7 @@ label market:
 
 menu:
 
-    "Buy the vase and split the cost. If Cupcake can't afford it, it'll be nice to help out.":
+    "Buy the vase and split the cost. If Coco can't afford it, it'll be nice to help out.":
         $ present = "vase"
         jump vasesplit
     
@@ -209,9 +226,9 @@ menu:
         $ present = "hat"
         jump berude
 
-    "Tell Cupcake about what you heard.":
+    "Tell Coco about what you heard.":
         $ present = "hat"
-        jump surprisedcupcake
+        jump surprisedcoco
 
 label vasesplit:
 
@@ -221,7 +238,7 @@ label vasesplit:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg market with fade
 
     m "It looks gorgeous."
 
@@ -241,7 +258,7 @@ label berude:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg market with fade
 
     c "You got her a hat? Cool!"
 
@@ -249,7 +266,7 @@ label berude:
 
     jump partyprep
 
-label surprisedcupcake:
+label surprisedcoco:
 
     c "Whoa! I didn't know that."
     
@@ -259,7 +276,7 @@ label surprisedcupcake:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg market with fade
 
     c "Haha, this one looks nice."
 
@@ -268,6 +285,12 @@ label surprisedcupcake:
     jump partyprep
 
 label partyprep:
+
+    scene black with fade
+
+    pause 1.0
+
+    scene bg cocohouse with fade
 
     "Wow, all of her closest friends showed up!"
 
@@ -287,7 +310,9 @@ label partyprep:
 
     m "Sure! That sounds like a load of fun."
 
-    r "Great!"
+    r "Perfect! Because everyone else mysteriously vanished when I asked."
+
+    m "Ah. So I’m the backup backup plan. Got it."
 
     r "Hey! Everyone! We have a volunteer to help bring Strudel here."
 
@@ -305,9 +330,13 @@ label partyprep:
 
     "You help decorate and prepare for the party."
 
+    jump yarnscene
+
+label yarnscene:
+
     if teaboost == "luck":
 
-        scene bg forest with fade
+        scene bg yarn with fade
         
         "Hm? What's this?"
 
@@ -323,6 +352,8 @@ label partyprep:
 
 label nextday:
 
+    scene bg doorclosed with fade
+
     m "Alright... time to get Strudel to the party without making her suspicious."
 
     m "Man, I feel kind of bad having to pretend that I forgot it was her birthday."
@@ -333,15 +364,15 @@ label nextday:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg strudelhouse with fade
 
     s "Oh! Lily! What brings you here so early?"
 
     m "Just out for a walk. Thought I’d stop by."
 
-    s "A walk? This early? That's suspicious."
+    s "A walk? At sunrise? Who are you and what have you done with Lily?"
 
-    m "No it’s not. Just... clearing my head. Here, I brought cookies."
+    m "It’s not that weird! Just... clearing my head. Here, I brought cookies."
 
     s "You did? Huh. Alright, you're forgiven."
 
@@ -467,7 +498,14 @@ label partyreveal:
 
         jump partyaftermath
 
+
 label partyaftermath:
+
+    scene black with fade
+
+    pause 1.0
+
+    scene bg forest with fade
 
     c "Wow, I'm exhausted!"
 
