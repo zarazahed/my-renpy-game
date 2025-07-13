@@ -2,7 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 141: Indentation mismatch.
+File "game/script.rpy", line 71: expected end of line
+    play music "audio/nicesong.mp3" loop False
+                                         ^
+
+File "game/script.rpy", line 91: expected end of line
+    play music "audio/nicesong.mp3" loop False
+                                         ^
 
 Ren'Py Version: Ren'Py 8.3.7.25031702
-Sat Jul 12 14:21:53 2025
+Sat Jul 12 20:20:58 2025

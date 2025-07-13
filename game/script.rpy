@@ -4,6 +4,8 @@ define m = Character('Me', color="#00750c")
 define r = Character('Raspberry', color="#920f5e")
 define s = Character('Strudel', color="#753d0a")
 image bg forest = "images/forest.png"
+default present = ""
+default teaboost = ""
 
 label start:
 
@@ -14,6 +16,8 @@ label start:
     "As a cat in Pumpkinville, I guess most days tend to be fairly quiet."
 
     "But today I feel a bit more bored than usual."
+
+    play music "audio/nicesong.mp3"
 
     "Yawn... and a bit tired."
 
@@ -43,10 +47,12 @@ label teascene:
 
 menu: 
     
-    "Enchanted herbal mix: gives energy boost for the rest of the day":
+    "Enchanted herbal mix: gives random energy boosts for a couple of days":
         jump herbal
+        $ teaboost = "energy"
 
     "Fairydew brew: gives you extra sprinkles of luck for the rest of the day":
+        $ teaboost = "luck"
         jump fairydew
 
     "Suspicious tea bag: who doesn't like a good surprise?":
@@ -169,7 +175,7 @@ label boringday:
 
     "I wonder if Coco and the others are having fun. I'm starting to regret saying no..."
 
-    "Guess I'll never know whether today would be fun."
+    "Guess I'll never know whether today would've been fun."
 
     return
 
@@ -196,12 +202,15 @@ label market:
 menu:
 
     "Buy the vase and split the cost. If Cupcake can't afford it, it'll be nice to help out.":
+        $ present = "vase"
         jump vasesplit
     
     "Say no and get your own present. It's not your problem anyways.":
+        $ present = "hat"
         jump berude
 
-    "Tell Cupcake about what you heard. "
+    "Tell Cupcake about what you heard.":
+        $ present = "hat"
         jump surprisedcupcake
 
 label vasesplit:
@@ -226,7 +235,7 @@ label berude:
 
     m "Um, I think I'm good. I'll get my own present."
 
-    c: "Oh, okay."
+    c "Oh, okay."
 
     scene black with fade
 
@@ -242,7 +251,7 @@ label berude:
 
 label surprisedcupcake:
 
-    c "Whoa! I didn't know that.
+    c "Whoa! I didn't know that."
     
     c "Let's both get her hats! I'm sure she'll love them."
 
@@ -260,7 +269,7 @@ label surprisedcupcake:
 
 label partyprep:
 
-    "Wow, so many people showed up!"
+    "Wow, all of her closest friends showed up!"
 
     r "Hello, Lily! I didn't know you were coming!"
 
@@ -292,10 +301,198 @@ label partyprep:
 
     m "I'm happy to help too."
 
-    jump nextday
+    scene black with fade
+
+    "You help decorate and prepare for the party."
+
+    if teaboost == "luck":
+
+        scene bg forest with fade
+        
+        "Hm? What's this?"
+
+        "Whoa, you found a magic yarnball on your way back home."
+
+        "Guess a bit of extra luck really never hurts!"
+
+        jump nextday
+
+    elif teaboost == "energy":
+
+        jump nextday
 
 label nextday:
 
-    
-    
+    m "Alright... time to get Strudel to the party without making her suspicious."
 
+    m "Man, I feel kind of bad having to pretend that I forgot it was her birthday."
+
+    m "Maybe cookies will help."
+
+    scene black with fade
+
+    pause 1.0
+
+    scene bg forest with fade
+
+    s "Oh! Lily! What brings you here so early?"
+
+    m "Just out for a walk. Thought I’d stop by."
+
+    s "A walk? This early? That's suspicious."
+
+    m "No it’s not. Just... clearing my head. Here, I brought cookies."
+
+    s "You did? Huh. Alright, you're forgiven."
+
+    m "Want to walk with me to the meadow? I heard something fun might be happening there today."
+
+    "Uh oh, hope I didn't just ruin everything. Why did I say something fun?"
+
+    "Okay, she doesn't seem to have caught on. Phew."
+
+    s "Are we talking fun like last time? Because chasing enchanted squirrels is not my idea of fun."
+
+    m "Less squirrels this time. I promise."
+
+    s "Alright, alright. Lead the way, cookie-bringer."
+
+    "Just act normal. Don’t ruin the surprise. Just act normal..."
+
+    jump partyreveal
+
+label partyreveal:
+    s "Wait... why are we walking this way? I thought we were going to the meadow?"
+
+    m "Uh... shortcut! Yeah. This way is faster."
+
+    s "You're acting weird."
+
+    m "No, I'm acting totally normal. So normal. Extremely normal."
+
+    s "Now I know something’s up."
+
+    m "Surprise!!!"
+
+    r "Happy birthday, Strudel!"
+
+    c "We decorated all morning!"
+
+    minu "And we got your favorite cake!"
+
+    s "Wait, what?! You all..."
+
+    s "You planned this whole thing?!"
+
+    m "We wanted it to be special."
+
+    s "I can’t believe this... You really caught me off guard. I was worried everyone forgot my birthday. Thank you!"
+
+    r "Group hug!!!"
+
+    c "Speech! Speech!"
+
+    s "As much as I'd love to deliver a speech, I'd say that birthday cake looks way more appetizing."
+
+    c "Yayy! Cake time!"
+
+    scene black with fade
+
+    pause 1.0
+
+    scene bg forest with fade
+
+    c "I'm... stuffed, to be honest."
+
+    c "Burp. Excuse me."
+
+    s "Same. Yaaawn."
+
+    s "I hate to say it, but I'm a tiny bit tired."
+
+    minu "I might just fall asleep... right... here..."
+
+    if teaboost == "energy":
+
+        c "Lily still looks pretty jumpy, though."
+
+        m "Do I?"
+
+        "Must be the tea kicking in!"
+
+        c "Wish I could say the same."
+
+    elif teaboost == "luck":
+        m "Me too."
+
+    r "Hey, hey, hey. No falling asleep yet! We need to open presents!"
+
+    s "That many? You guys didn't have to!"
+
+    c "How could we not? I still use that mug you gifted me every day. Hey, are you crying?"
+
+    s "Allergies. Anyways, let me open this one..."
+
+    if present == "vase":
+        s "I LOVE the vase!"
+        
+        "Wow, she must really like it... she put flowers in it right away."
+
+    elif present == "hat":
+        s "A hat? I've been wanting a new one for such a long time!! This is my favourite style, too!"
+        
+        "I knew it! Strudel put it on right away."
+    
+    r "Here's mine, hehe."
+
+    s "Wow! Is this Mysticnip?!"
+
+    r "Haha, yup."
+
+    minu "I made you these pistachio cookies!"
+
+    s "You know how much I love those!!! Minu, you're the best!"
+
+    if teaboost == "luck":
+
+        m "Oh yeah, I also found this yesterday! It's a magic yarn ball. I wanted to give it to you."
+
+        c "A magic yarn ball? Sweet mother of pearl, that sounds epic."
+
+        m "I tested it out. This thing glows when you pounce on it! And it always rolls just out of reach! It's the best."
+
+        s "Lily! This is awesome!!! Thank you so much!"
+
+    elif teaboost == "energy":
+
+        jump partyaftermath
+
+label partyaftermath:
+
+    c "Wow, I'm exhausted!"
+
+    m "Yeah, me too."
+
+    s "You really outdid yourselves with the decorations!"
+
+    r "It was worth it! Today was, like, the best birthday party ever."
+
+    minu "I know, right?"
+
+    s "I'm so grateful to have such nice felines for friends."
+
+    c "Right back to you, Strudel!"
+
+    "Today really was an amazing day, wasn't it?"
+
+    "I'm glad I made the choices I did!"
+
+    scene black with fade
+
+    play music "audio/ending.mp3"
+
+    "THANK YOU FOR PLAYING!"
+
+    pause 1.0
+
+    return
