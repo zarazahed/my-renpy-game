@@ -11,6 +11,8 @@ image bg market = im.Scale("images/market.png", 1920, 1080)
 image bg strudelhouse = im.Scale("images/strudelhouse.png", 1920, 1080)
 image bg cocohouse = im.Scale("images/cocohouse.png", 1920, 1080)
 image bg yarn = im.Scale("images/yarn.png", 1920, 1080)
+image bg kitchen = im.Scale("images/kitchen.png", 1920, 1080)
+image bg cocohousenight = im.Scale("images/cocohousenight.png", 1920, 1080)
 
 default present = ""
 default teaboost = ""
@@ -77,7 +79,11 @@ menu:
 
 label herbal:
 
-    scene bg forest with fade
+    scene bg kitchen with fade
+
+    show cocosmile
+
+    show table
 
     m "Here's your tea!"
 
@@ -95,7 +101,11 @@ label herbal:
 
 label fairydew:
 
-    scene bg forest with fade
+    scene bg kitchen with fade
+
+    show cocosmile
+
+    show table
 
     m "Here's your tea!"
 
@@ -113,7 +123,11 @@ label fairydew:
 
 label poison:
 
-    scene bg forest with fade
+    scene bg kitchen with fade
+
+    show cocosmile
+
+    show table
 
     m "Here's your tea!"
 
@@ -198,6 +212,8 @@ label boringday:
 
 label market:
 
+    show cocosmile
+
     c "Yay! Let's go to the market after we've finished the tea."
 
     scene black with fade
@@ -207,6 +223,8 @@ label market:
     scene bg market with fade
 
     m "Wow, so many new stalls have popped up since I last visited."
+
+    show cocosmile
 
     c "I know, right? Cookies... mushrooms... poisons... eek, I'll get distracted. Stay on track. Present for Strudel."
 
@@ -268,6 +286,8 @@ label berude:
 
 label surprisedcoco:
 
+    m "I actually heard her talking about wanting a hat recently..."
+
     c "Whoa! I didn't know that."
     
     c "Let's both get her hats! I'm sure she'll love them."
@@ -320,7 +340,7 @@ label partyprep:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg cocohouse with fade
 
     r "Haha, everyone is super happy you could do it. Strudel really likes you."
 
@@ -403,6 +423,12 @@ label partyreveal:
 
     s "Now I know something’s up."
 
+    m "Hey, want to go say hi to Coco? I need to return something to her."
+
+    s "Um, sure?"
+
+    scene bg cocohouse with fade
+
     m "Surprise!!!"
 
     r "Happy birthday, Strudel!"
@@ -431,7 +457,7 @@ label partyreveal:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg cocohousenight with fade
 
     c "I'm... stuffed, to be honest."
 
@@ -498,18 +524,21 @@ label partyreveal:
 
         jump partyaftermath
 
-
 label partyaftermath:
 
     scene black with fade
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg cocohousenight with fade
+
+    show cocosmile
 
     c "Wow, I'm exhausted!"
 
     m "Yeah, me too."
+
+    hide cocosmile
 
     s "You really outdid yourselves with the decorations!"
 
@@ -518,6 +547,8 @@ label partyaftermath:
     minu "I know, right?"
 
     s "I'm so grateful to have such nice felines for friends."
+
+    show cocosmile
 
     c "Right back to you, Strudel!"
 
