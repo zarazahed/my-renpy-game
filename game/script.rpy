@@ -93,6 +93,12 @@ label herbal:
 
     "I'm feeling a bit more energetic already!"
 
+    hide table
+
+    show cocohappy
+
+    show table
+
     c "This is amazing!"
 
     "Wow, I'm glad she likes it so much!"
@@ -115,6 +121,12 @@ label fairydew:
 
     "Ha, who knows? Maybe something lucky will happen today."
 
+    hide table
+
+    show cocohappy
+
+    show table
+
     c "This is amazing!"
 
     "Wow, I'm glad she likes it so much!"
@@ -132,6 +144,12 @@ label poison:
     m "Here's your tea!"
 
     c "Thank you!"
+
+    hide table
+
+    show cocosad
+
+    show table
 
     c "Are you feeling okay? You don't look too well."
 
@@ -165,6 +183,14 @@ label poison:
 
 label invitation:
 
+    hide cocohappy
+
+    hide table
+
+    show cocosmile
+
+    show table
+
     c "Hey, did you know Strudel's birthday is tomorrow?"
 
     m "Wait, really? Oh no... I had it marked a week later in my calendar."
@@ -188,7 +214,7 @@ menu:
 
 label boringday:
 
-    scene bg forest with fade
+    scene bg doorclosed with fade
 
     "Well, Coco left to buy a present."
 
@@ -202,7 +228,7 @@ label boringday:
 
     scene bg forest with fade
 
-    "There! I did everything I wanted to do."
+    "Yawn... it's getting late, I'm going to bed."
 
     "I wonder if Coco and the others are having fun. I'm starting to regret saying no..."
 
@@ -212,7 +238,11 @@ label boringday:
 
 label market:
 
-    show cocosmile
+    hide table
+
+    show cocohappy
+
+    show table
 
     c "Yay! Let's go to the market after we've finished the tea."
 
@@ -230,17 +260,17 @@ label market:
 
     c "Hm.. I think I see a vase that she would love."
 
-    c "Do you want to get that for Strudel? I think we can afford it if we split the cost."
+    c "Do you want to get that for Strudel? We could split the cost."
 
     "Wow, that's a tough choice. She would definitely love that vase, but I heard her talking about wanting a new hat the other day."
 
 menu:
 
-    "Buy the vase and split the cost. If Coco can't afford it, it'll be nice to help out.":
+    "Buy the vase and split the cost.":
         $ present = "vase"
         jump vasesplit
     
-    "Say no and get your own present. It's not your problem anyways.":
+    "Say no and get your own present.":
         $ present = "hat"
         jump berude
 
@@ -258,6 +288,8 @@ label vasesplit:
 
     scene bg market with fade
 
+    show cocovase with dissolve
+
     m "It looks gorgeous."
 
     c "I know, right?"
@@ -268,7 +300,11 @@ label vasesplit:
 
 label berude:
 
+    show cocosmile
+
     m "Um, I think I'm good. I'll get my own present."
+
+    show cocosad
 
     c "Oh, okay."
 
@@ -277,6 +313,8 @@ label berude:
     pause 1.0
 
     scene bg market with fade
+
+    show cocovase with dissolve
 
     c "You got her a hat? Cool!"
 
@@ -298,7 +336,9 @@ label surprisedcoco:
 
     scene bg market with fade
 
-    c "Haha, this one looks nice."
+    show cocohats with dissolve
+
+    c "Yay, they look awesome!"
 
     c "Ahh! I didn't even notice! We have to hurry. They're going to start decorating soon!"
 
@@ -398,7 +438,7 @@ label nextday:
 
     m "Want to walk with me to the meadow? I heard something fun might be happening there today."
 
-    "Uh oh, hope I didn't just ruin everything. Why did I say something fun?"
+    "Uh oh, hope I didn't just ruin everything."
 
     "Okay, she doesn't seem to have caught on. Phew."
 
@@ -435,7 +475,11 @@ label partyreveal:
 
     c "We decorated all morning!"
 
+    show minu
+
     minu "And we got your favorite cake!"
+
+    hide minu
 
     s "Wait, what?! You all..."
 
@@ -467,7 +511,11 @@ label partyreveal:
 
     s "I hate to say it, but I'm a tiny bit tired."
 
+    show minu
+
     minu "I might just fall asleep... right... here..."
+
+    hide minu
 
     if teaboost == "energy":
 
@@ -482,7 +530,7 @@ label partyreveal:
     elif teaboost == "luck":
         m "Me too."
 
-    r "Hey, hey, hey. No falling asleep yet! We need to open presents!"
+    r "Hey, hey, hey. No falling asleep yet! We need her to open the presents!"
 
     s "That many? You guys didn't have to!"
 
@@ -506,7 +554,11 @@ label partyreveal:
 
     r "Haha, yup."
 
-    minu "I made you these pistachio cookies!"
+    show minucookies
+
+    minu "I made you these pistachio chocolate chip cookies!"
+
+    hide minucookies
 
     s "You know how much I love those!!! Minu, you're the best!"
 
@@ -532,7 +584,7 @@ label partyaftermath:
 
     scene bg cocohousenight with fade
 
-    show cocosmile
+    show cocosmile with dissolve
 
     c "Wow, I'm exhausted!"
 
@@ -544,11 +596,15 @@ label partyaftermath:
 
     r "It was worth it! Today was, like, the best birthday party ever."
 
+    show minu
+
     minu "I know, right?"
 
-    s "I'm so grateful to have such nice felines for friends."
+    hide minu
 
-    show cocosmile
+    s "I'm so grateful to have such nice friends."
+
+    show cocosmile with dissolve
 
     c "Right back to you, Strudel!"
 
