@@ -13,6 +13,8 @@ image bg cocohouse = im.Scale("images/cocohouse.png", 1920, 1080)
 image bg yarn = im.Scale("images/yarn.png", 1920, 1080)
 image bg kitchen = im.Scale("images/kitchen.png", 1920, 1080)
 image bg cocohousenight = im.Scale("images/cocohousenight.png", 1920, 1080)
+image bg bedroom = im.Scale("images/bedroom.png", 1920, 1080)
+image bg path = im.Scale("images/path.png", 1920, 1080)
 
 default present = ""
 default teaboost = ""
@@ -35,7 +37,7 @@ label start:
 
     scene bg dooropen
 
-    show cocosmile with dissolve
+    show cocosmile
 
     c "Good morning, Lily!"
 
@@ -208,7 +210,7 @@ menu:
     "Say yes.":
         jump market
 
-    "Decline.":
+    "Say no.":
         jump boringday
 
 
@@ -226,7 +228,7 @@ label boringday:
 
     pause 1.0
 
-    scene bg forest with fade
+    scene bg bedroom with fade
 
     "Yawn... it's getting late, I'm going to bed."
 
@@ -288,7 +290,7 @@ label vasesplit:
 
     scene bg market with fade
 
-    show cocovase with dissolve
+    show cocovase
 
     m "It looks gorgeous."
 
@@ -314,7 +316,7 @@ label berude:
 
     scene bg market with fade
 
-    show cocovase with dissolve
+    show cocovase
 
     c "You got her a hat? Cool!"
 
@@ -336,7 +338,7 @@ label surprisedcoco:
 
     scene bg market with fade
 
-    show cocohats with dissolve
+    show cocohats
 
     c "Yay, they look awesome!"
 
@@ -354,6 +356,8 @@ label partyprep:
 
     "Wow, all of her closest friends showed up!"
 
+    show raspberrysmile
+
     r "Hello, Lily! I didn't know you were coming!"
 
     m "Hi!"
@@ -370,6 +374,10 @@ label partyprep:
 
     m "Sure! That sounds like a load of fun."
 
+    hide raspberrysmile
+    
+    show raspberrysmirk
+
     r "Perfect! Because everyone else mysteriously vanished when I asked."
 
     m "Ah. So I’m the backup backup plan. Got it."
@@ -381,6 +389,8 @@ label partyprep:
     pause 1.0
 
     scene bg cocohouse with fade
+
+    show raspberrysmile
 
     r "Haha, everyone is super happy you could do it. Strudel really likes you."
 
@@ -404,11 +414,23 @@ label yarnscene:
 
         "Guess a bit of extra luck really never hurts!"
 
-        jump nextday
+        jump bedtime
 
     elif teaboost == "energy":
 
-        jump nextday
+        jump bedtime
+
+label bedtime:
+
+    scene bg bedroom with fade
+
+    "Phew, that was a long day. Time to hit the sack!"
+
+    scene black with fade
+
+    pause 1.0
+
+    jump nextday
 
 label nextday:
 
@@ -426,9 +448,15 @@ label nextday:
 
     scene bg strudelhouse with fade
 
+    show strudelsmile
+
     s "Oh! Lily! What brings you here so early?"
 
     m "Just out for a walk. Thought I’d stop by."
+
+    hide strudelsmile
+
+    show strudelsmirk
 
     s "A walk? At sunrise? Who are you and what have you done with Lily?"
 
@@ -437,12 +465,22 @@ label nextday:
     s "You did? Huh. Alright, you're forgiven."
 
     m "Want to walk with me to the meadow? I heard something fun might be happening there today."
+    
+    hide strudelsmirk
 
-    "Uh oh, hope I didn't just ruin everything."
+    show strudelsmile
 
-    "Okay, she doesn't seem to have caught on. Phew."
+    s "Sure!"
 
-    s "Are we talking fun like last time? Because chasing enchanted squirrels is not my idea of fun."
+    scene black with fade
+
+    pause 1.0
+
+    scene bg path with fade
+
+    show strudelsmirk
+
+    s "By the way, are we talking fun like last time? Because chasing enchanted squirrels is not my idea of fun."
 
     m "Less squirrels this time. I promise."
 
@@ -453,6 +491,11 @@ label nextday:
     jump partyreveal
 
 label partyreveal:
+
+    hide strudelsmirk
+
+    show strudelsuspicious
+
     s "Wait... why are we walking this way? I thought we were going to the meadow?"
 
     m "Uh... shortcut! Yeah. This way is faster."
@@ -471,9 +514,17 @@ label partyreveal:
 
     m "Surprise!!!"
 
+    show raspberryhappy
+
     r "Happy birthday, Strudel!"
 
+    hide raspberryhappy
+
+    show cocohappy
+
     c "We decorated all morning!"
+
+    hide cocohappy
 
     show minu
 
@@ -481,21 +532,45 @@ label partyreveal:
 
     hide minu
 
+    show strudelsurprise
+
     s "Wait, what?! You all..."
 
     s "You planned this whole thing?!"
 
     m "We wanted it to be special."
 
+    hide strudelsurprise
+
+    show strudelsmile
+
     s "I can’t believe this... You really caught me off guard. I was worried everyone forgot my birthday. Thank you!"
+
+    hide strudelsmile
+
+    show raspberryhappy
 
     r "Group hug!!!"
 
+    hide raspberryhappy
+
+    show cocosmile
+
     c "Speech! Speech!"
+
+    hide cocosmile
+
+    show strudelsmirk
 
     s "As much as I'd love to deliver a speech, I'd say that birthday cake looks way more appetizing."
 
+    hide strudelsmirk
+
+    show cocohappy
+
     c "Yayy! Cake time!"
+
+    hide cocohappy
 
     scene black with fade
 
@@ -503,21 +578,31 @@ label partyreveal:
 
     scene bg cocohousenight with fade
 
+    show cocosmile
+
     c "I'm... stuffed, to be honest."
 
     c "Burp. Excuse me."
+
+    hide cocosmile
+
+    show strudelsmile
 
     s "Same. Yaaawn."
 
     s "I hate to say it, but I'm a tiny bit tired."
 
+    hide strudelsmile
+
     show minu
 
     minu "I might just fall asleep... right... here..."
 
-    hide minu
-
     if teaboost == "energy":
+
+        hide minu
+
+        show cocosmile
 
         c "Lily still looks pretty jumpy, though."
 
@@ -527,16 +612,34 @@ label partyreveal:
 
         c "Wish I could say the same."
 
+        hide cocosmile
+
     elif teaboost == "luck":
         m "Me too."
 
+        hide minu
+
+    show raspberrysmirk
+
     r "Hey, hey, hey. No falling asleep yet! We need her to open the presents!"
+
+    hide raspberrysmirk
+
+    show strudelsurprise
 
     s "That many? You guys didn't have to!"
 
-    c "How could we not? I still use that mug you gifted me every day. Hey, are you crying?"
+    hide strudelsurprise
 
-    s "Allergies. Anyways, let me open this one..."
+    show cocohappy
+
+    c "How could we not? I still use that mug you gifted me every day."
+
+    hide cocohappy
+
+    show strudelsmile
+
+    s "You are all way too sweet. Let me open this one..."
 
     if present == "vase":
         s "I LOVE the vase!"
@@ -544,15 +647,29 @@ label partyreveal:
         "Wow, she must really like it... she put flowers in it right away."
 
     elif present == "hat":
-        s "A hat? I've been wanting a new one for such a long time!! This is my favourite style, too!"
+        s "A hat? I've been wanting a new one for such a long time!! My favourite style, too!"
         
-        "I knew it! Strudel put it on right away."
+        "I knew it! Strudel seems really happy."
+
+    hide strudelsmile
     
-    r "Here's mine, hehe."
+    show raspberrysmile
 
-    s "Wow! Is this Mysticnip?!"
+    r "Here's mine!"
 
-    r "Haha, yup."
+    hide raspberrysmile
+
+    show strudelsmile
+
+    s "Wow! Is this Mysticnip?! You remembered!!"
+
+    hide strudelsmile
+
+    show raspberrysmile
+
+    r "Haha, yup!"
+
+    hide raspberrysmile
 
     show minucookies
 
@@ -560,17 +677,29 @@ label partyreveal:
 
     hide minucookies
 
+    show strudelsmile
+
     s "You know how much I love those!!! Minu, you're the best!"
 
     if teaboost == "luck":
 
         m "Oh yeah, I also found this yesterday! It's a magic yarn ball. I wanted to give it to you."
 
+        hide strudelsmile
+
+        show cocosmile
+
         c "A magic yarn ball? Sweet mother of pearl, that sounds epic."
 
         m "I tested it out. This thing glows when you pounce on it! And it always rolls just out of reach! It's the best."
 
+        hide cocosmile
+
+        show strudelsmile
+
         s "Lily! This is awesome!!! Thank you so much!"
+
+        hide strudelsmile
 
     elif teaboost == "energy":
 
@@ -584,7 +713,7 @@ label partyaftermath:
 
     scene bg cocohousenight with fade
 
-    show cocosmile with dissolve
+    show cocosmile
 
     c "Wow, I'm exhausted!"
 
@@ -592,9 +721,17 @@ label partyaftermath:
 
     hide cocosmile
 
+    show strudelsmile
+
     s "You really outdid yourselves with the decorations!"
 
+    hide strudelsmile
+
+    show raspberrysmile
+
     r "It was worth it! Today was, like, the best birthday party ever."
+
+    hide raspberrysmile
 
     show minu
 
@@ -602,9 +739,13 @@ label partyaftermath:
 
     hide minu
 
+    show strudelsmile
+
     s "I'm so grateful to have such nice friends."
 
-    show cocosmile with dissolve
+    hide strudelsmile
+
+    show cocosmile
 
     c "Right back to you, Strudel!"
 
